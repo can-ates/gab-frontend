@@ -1,0 +1,20 @@
+room-group { 
+    id,
+    users[]
+    messages
+}
+
+room-private {
+    id,
+    users[]
+    messages
+}
+
+users {
+    room-groupid,
+    room-privateid,
+    avatar,
+    name,
+    email,
+    
+}
