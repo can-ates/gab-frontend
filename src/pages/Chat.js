@@ -1,25 +1,33 @@
 import React from 'react'
+
+//BOOTSTRAP
 import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/esm/Col'
 import Row from 'react-bootstrap/esm/Row'
 
+//REDUX
+import {useSelector} from 'react-redux'
+
+//COMPONENTS
 import Tab from '../components/Tab'
 import Messenger from '../components/Messenger'
 import Detail from '../components/Detail'
 import Auth from '../hoc/Auth'
 
 const Chat = () => {
+    const user = useSelector(state => state.user)
+    
     return (
-        <Container fluid='xl' className='h-100 border border-success p-2' style={{backgroundColor :'#F4F4F4'}} >
-            <Row >
-                <Col sm={1} className='d-flex justify-content-center' >
+        <Container fluid='xl' className='h-100 p-2' style={{backgroundColor :'#F4F4F4'}} >
+            <Row className='h-100' >
+                <Col sm={1} className='d-flex justify-content-center mt-2' >
                     <Tab />
                 </Col>
-                <Col sm={8} >
+                <Col sm={8} className='mt-2 px-0' >
                     <Messenger />
                 </Col>
-                <Col sm={3}>
-                    <Detail />
+                <Col sm={3} className='d-flex justify-content-center mt-2' >
+                    <Detail user={user} />
                 </Col>
             </Row>
         </Container>
