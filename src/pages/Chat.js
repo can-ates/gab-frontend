@@ -9,9 +9,9 @@ import Row from 'react-bootstrap/esm/Row'
 import {useSelector} from 'react-redux'
 
 //COMPONENTS
-import Tab from '../components/Tab'
-import Messenger from '../components/Messenger'
-import Detail from '../components/Detail'
+import Tab from '../components/Tab/'
+import Messenger from '../components/Messenger/'
+import Detail from '../components/Detail/'
 import Auth from '../hoc/Auth'
 
 const Chat = () => {

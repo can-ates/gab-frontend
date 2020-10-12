@@ -9,4 +9,4 @@ client.configure(feathers.authentication({
   storage: window.localStorage
 }));
 
-export default client;
+export  {client, socket};

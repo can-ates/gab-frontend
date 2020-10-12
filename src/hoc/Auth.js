@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
 import { addUser } from '../reducers/actions';
-import client from '../feathers'
+import { client } from '../feathers';
 
 export default function (WrappedComponent) {
   const Auth = () => {
@@ -14,7 +14,6 @@ export default function (WrappedComponent) {
       client
         .reAuthenticate()
         .then(doc => {
-          console.log(doc);
           dispatch(addUser(doc.user));
           history.push('/chat');
         })
@@ -26,7 +25,5 @@ export default function (WrappedComponent) {
     return <WrappedComponent />;
   };
 
-  return Auth
+  return Auth;
 }
-
-
