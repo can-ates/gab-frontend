@@ -1,20 +1,31 @@
-import React, {useEffect} from 'react'
-import Button from 'react-bootstrap/esm/Button'
+import React from 'react';
+import Button from 'react-bootstrap/esm/Button';
+import { useDispatch } from 'react-redux';
 
-const Conversation = ({conversation}) => {
-    useEffect(() => {
-        console.log(conversation);
-    }, [])
+//ACTION
+import { setRoom } from '../../actions/room';
 
-    return (
-        <Button
-            style={{ borderWidth: '3px', borderColor: `${conversation.avatar}`,  color: `${conversation.avatar}` }}
-            className='bg-white rounded-circle font-weight-bolder mb-2'
-            size='lg'
-          >
-            {conversation.title.charAt(0).toUpperCase()}
-          </Button>
-    )
-}
+const Conversation = ({ conversation }) => {
+  const dispatch = useDispatch();
 
-export default Conversation
+  const handleRoom = () => {
+    dispatch(setRoom(conversation));
+  };
+
+  return (
+    <Button
+      style={{
+        borderWidth: '3px',
+        borderColor: `${conversation.avatar}`,
+        color: `${conversation.avatar}`,
+      }}
+      className='bg-white rounded-circle font-weight-bolder mb-2'
+      size='lg'
+      onClick={handleRoom}
+    >
+      {conversation.title.charAt(0).toUpperCase()}
+    </Button>
+  );
+};
+
+export default Conversation;

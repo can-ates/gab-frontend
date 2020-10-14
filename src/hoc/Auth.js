@@ -2,7 +2,7 @@ import React, { useLayoutEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
-import { addUser } from '../reducers/actions';
+import { addUser } from '../actions/user';
 import { client } from '../feathers';
 
 export default function (WrappedComponent) {

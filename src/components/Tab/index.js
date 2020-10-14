@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import Popover from 'react-bootstrap/Popover';
@@ -7,11 +7,14 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
-import { client, socket } from '../../feathers';
+import { client } from '../../feathers';
 import Conversation from './Conversation';
+
+import { setRoom } from '../../actions/room';
 
 const Tab = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
   const user = useSelector(state => state.user);
 
   //SET ERRORS
@@ -42,6 +45,7 @@ const Tab = () => {
       .service('rooms')
       .find()
       .then(res => {
+        dispatch(setRoom(res.data[0]));
         setGroups(res.data);
       })
       .catch(err => {
@@ -109,9 +113,9 @@ const Tab = () => {
   );
 
   return (
-    <div className='d-flex flex-column align-items-center'>
+    <div className='d-flex flex-column align-items-center '>
       <div
-        className='h-50 tab-scroll'
+        className='h-50 tab-scroll p-2'
         style={{
           overflow: 'auto',
         }}

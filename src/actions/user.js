@@ -1,4 +1,4 @@
-export const addUser = (userData, router) => dispatch =>  {
+export const addUser = (userData) => dispatch =>  {
     
     dispatch({
         type: 'ADD_USER',

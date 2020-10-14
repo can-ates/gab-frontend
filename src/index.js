@@ -6,14 +6,14 @@ import { createStore, applyMiddleware } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import { Provider } from 'react-redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import user from './reducers/store';
+import rootReducer from './store';
 
 import 'normalize.css';
 import './index.css';
 import '../src/bootstrap.min.css';
 
 const middlewareEnhancer = applyMiddleware(thunkMiddleware)
-const store = createStore(user, composeWithDevTools(middlewareEnhancer))
+const store = createStore(rootReducer, composeWithDevTools(middlewareEnhancer))
 
 
 
@@ -25,4 +25,4 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-export default store
+
