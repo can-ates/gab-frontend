@@ -20,7 +20,7 @@ const Chat = () => {
     return (
         <Container fluid='xl' className='h-100' style={{backgroundColor :'#F4F4F4'}} >
             <Row className='h-100' >
-                <Col sm={1} className='d-flex justify-content-center mt-2 ' >
+                <Col sm={1} className='d-flex justify-content-center' >
                     <Tab />
                 </Col>
                 <Col sm={8} className='px-0 py-2' >

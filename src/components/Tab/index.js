@@ -7,10 +7,11 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
-import { client } from '../../feathers';
+import { client, socket } from '../../feathers';
 import Conversation from './Conversation';
 
 import { setRoom } from '../../actions/room';
+import { socketio } from '@feathersjs/client';
 
 const Tab = () => {
   const history = useHistory();
@@ -28,16 +29,16 @@ const Tab = () => {
   const [priv, setPriv] = useState(false);
 
   //REAL-TIME LISTENER FOR CREATED GROUPS
-  useEffect(() => {
-    client.service('rooms').on('followedGroups', res => {
-      setGroups(res.groups);
-      console.log(res.groups);
-    });
+  // useEffect(() => {
+  //   client.service('rooms').on('followedGroups', res => {
+  //     setGroups(res.groups);
+  //     console.log(res.groups);
+  //   });
 
-    return function () {
-      client.service('rooms').removeListener('followedGroups');
-    };
-  }, []);
+  //   return function () {
+  //     client.service('rooms').removeListener('followedGroups');
+  //   };
+  // }, []);
 
   //FETCHING FOLLOWED GROUPS FOR PARTICULAR USER
   useEffect(() => {
@@ -51,12 +52,14 @@ const Tab = () => {
       .catch(err => {
         setError(err);
       });
+
+      
   }, []);
 
   //CREATE GROUPS
   const handleSubmit = async e => {
     e.preventDefault();
-
+   
     client
       .service('rooms')
       .create({
@@ -64,8 +67,11 @@ const Tab = () => {
         private: priv,
         founder: user._id,
       })
+      .then(res => {
+        setGroups(prv => [...prv, res])
+      })
       .catch(res => {
-        history.push('/');
+        console.log(res);
       });
   };
 
@@ -113,11 +119,12 @@ const Tab = () => {
   );
 
   return (
-    <div className='d-flex flex-column align-items-center '>
+    <div className='d-flex flex-column align-items-center vh-100'>
       <div
-        className='h-50 tab-scroll p-2'
+        className='tab-scroll p-2'
         style={{
-          overflow: 'auto',
+          overflowY: 'scroll',
+          height: '50%'
         }}
       >
         <h6 className='font-weight-light text-secondary h6 text-center font-weight-normal'>
@@ -140,7 +147,7 @@ const Tab = () => {
           </OverlayTrigger>
         </div>
 
-        <div className='w-100 d-flex flex-column justify-content-center align-content-center '>
+        <div className='w-100 d-flex flex-column justify-content-center align-items-center '>
           {groups.map(group => (
             <Conversation key={group._id} conversation={group} />
           ))}
