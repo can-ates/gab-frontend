@@ -1,12 +1,4 @@
-#root {
-  height: 100%;
-}
 
-html,
-body {
-  height: 100%;
-  width: 100%;
-}
 
 .tab-scroll::-webkit-scrollbar {
   display: none;
@@ -21,4 +13,17 @@ body {
 .chat-input:focus {
   outline: none;
   box-shadow: none !important;
+}
+
+.scrollListener::-webkit-scrollbar {
+  width: 5px;
+}
+ 
+.scrollListener::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 2px #6B3BB4;
+}
+ 
+.scrollListener::-webkit-scrollbar-thumb {
+  background-color: #6B3BB4;
+  outline: 1px solid #6B3BB4;
 }

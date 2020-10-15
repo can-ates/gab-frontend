@@ -3,8 +3,8 @@ const INITIAL_STATE = {
       title: '',
       avatar: '',
       private: '',
-      participants: [],
-      messages: [],
+      participants: null,
+      messages: null,
       founder: '',
       _id: ''
   },

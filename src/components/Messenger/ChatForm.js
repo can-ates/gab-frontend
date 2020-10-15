@@ -1,29 +1,29 @@
-import React, { useState } from 'react'
-import {useSelector} from 'react-redux'
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-import {client} from '../../feathers'
+import { client } from '../../feathers';
 
 const ChatForm = () => {
-  const user = useSelector(state => state.user.user)
-  const room = useSelector(state => state.room.currentRoom)
+  const user = useSelector(state => state.user.user);
+  const room = useSelector(state => state.room.currentRoom);
 
   const [message, setMessage] = useState('');
+
+
 
   const handleSubmit = e => {
     e.preventDefault();
 
-
     client.service('messages').create({
       text: message,
       sender: user._id,
-      roomId: room._id
-    }).then(res => {
-      console.log(res);
+      roomId: room._id,
     })
     
+    setMessage('');
   };
 
   return (

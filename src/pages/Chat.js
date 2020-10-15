@@ -18,8 +18,8 @@ const Chat = () => {
     const user = useSelector(state => state.user.user)
     
     return (
-        <Container fluid='xl' className='h-100' style={{backgroundColor :'#F4F4F4'}} >
-            <Row className='h-100' >
+        <Container fluid='xl' style={{backgroundColor :'#F4F4F4'}} >
+            <Row  >
                 <Col sm={1} className='d-flex justify-content-center' >
                     <Tab />
                 </Col>
