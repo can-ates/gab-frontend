@@ -21,9 +21,11 @@ const ChatForm = () => {
       text: message,
       sender: user._id,
       roomId: room._id,
+    }).then(() => {
+      setMessage('');
     })
     
-    setMessage('');
+    
   };
 
   return (

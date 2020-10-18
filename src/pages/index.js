@@ -11,7 +11,7 @@ import Auth from '../hoc/Auth'
 
 const Home = () => {
   return (
-    <Container className='m-auto container-md h-100'>
+    <Container className='m-auto container-md vh-100'>
       <Row className='d-flex justify-content-center align-items-center h-100'>
         <Col sm={6}>
           <Row>

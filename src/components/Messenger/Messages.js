@@ -1,29 +1,34 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import Card from 'react-bootstrap/Card';
 import Image from 'react-bootstrap/Image';
 
+import { setMessages } from '../../actions/room';
+
 import { client } from '../../feathers';
 
-const Messages = ({ room }) => {
-  const [messages, setMessages] = useState([]);
+const Messages = () => {
+  const dispatch = useDispatch();
   const user = useSelector(state => state.user.user);
+  const room = useSelector(state => state.room.currentRoom);
 
-  useEffect(() => {
-    setMessages(room.messages);
-  }, [room]);
+  const [messages, setMessage] = useState([])
+
+  //TODO ASSIGN NEW CREATED ROOM TO SOCKET CHANNEL
 
   //REAL-TIME LISTENER FOR CREATED MESSAGES
   useEffect(() => {
     //AUTOSCROLL AFTER EVERY MESSAGE
     let scroll = document.querySelector('.scrollListener');
-
+    
+    setMessage(room.messages)
     scroll.maxScrollTop = scroll.scrollHeight - scroll.offsetHeight;
 
-    
     client.service('rooms').on('reflectMessages', res => {
-      setMessages(res.messages);
+      
+      setMessage(res.messages)
+      dispatch(setMessages(res.messages));
 
       if (scroll.maxScrollTop - scroll.scrollTop <= scroll.offsetHeight) {
         scroll.scrollTop = scroll.scrollHeight;
@@ -33,8 +38,7 @@ const Messages = ({ room }) => {
 
   return (
     <React.Fragment>
-      {messages
-        ? messages.map(message => (
+      {messages.map(message => (
             <div
               key={message._id}
               className='d-flex mb-3'
@@ -80,7 +84,7 @@ const Messages = ({ room }) => {
               />
             </div>
           ))
-        : 'Fetching'}
+        }
     </React.Fragment>
   );
 };

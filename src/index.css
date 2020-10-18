@@ -27,3 +27,20 @@
   background-color: #6B3BB4;
   outline: 1px solid #6B3BB4;
 }
+
+.btn, button {
+  box-shadow: none;
+}
+
+.bs-popover-right>.arrow::after, .bs-popover-auto[x-placement^="right"]>.arrow::after {
+  border-right-color: #6B3BB4 !important;
+}
+
+.custom-control-input:checked ~ .custom-control-label::before {
+  background-color: #0093FF !important;
+  border-color: #0093FF !important;
+}
+
+.form-control:disabled, .form-control[readonly] {
+  background-color: aliceblue !important;
+}

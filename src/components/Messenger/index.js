@@ -29,7 +29,7 @@ const Messenger = () => {
         <div className='ml-2'>
           <h6 className='mb-0'>{room.title}</h6>
           <span className='font-weight-light text-secondary'>
-            {room.participants ? room.participants.length : 'anan'} members
+            {room.participants.length} members
           </span>
         </div>
       </div>
@@ -37,7 +37,7 @@ const Messenger = () => {
         overflowY: 'scroll',
         height: '100%'
       }} >
-        <Messages room={room} />
+        <Messages  />
       </div>
       <div className='px-4 py-2 border-top'>
         <ChatForm />
