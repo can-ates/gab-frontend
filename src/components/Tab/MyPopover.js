@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import {useSelector} from 'react-redux'
+
 import Popover from 'react-bootstrap/Popover';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Button from 'react-bootstrap/Button';
@@ -9,6 +11,9 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import { client } from '../../feathers';
 
 const MyPopover = props => {
+  //USER STATE
+  const user = useSelector(state => state.user.user)
+
   //SET TRANSITIONS
   const [showCreate, setShowCreate] = useState(false);
   const [showJoin, setShowJoin] = useState(false);
@@ -24,7 +29,7 @@ const MyPopover = props => {
   const [priv, setPriv] = useState(false);
 
   //SET POPOVER
-  const [showPopover, setShowPopover] = useState(true);
+  const [showPopover, setShowPopover] = useState(false);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -33,6 +38,7 @@ const MyPopover = props => {
     setShowPopover(false);
   };
 
+  //SEARCH FOR GROUPS BY TITLE
   const handleSearch = e => {
     e.preventDefault();
 
@@ -60,12 +66,30 @@ const MyPopover = props => {
     }
   };
 
+  //BE MEMBER OF GROUP
+  const beMember = roomData => {
+    client
+      .service('rooms')
+      .patch(
+        roomData._id,
+        {
+          $push: {
+            participants: user._id
+          },
+        }
+      )
+      .then(res => {
+        props.joinGroup(res)
+      })
+      .catch(err => console.log(err));
+  };
+
   const popover = (
     <Popover
       id='popover-basic'
       className='rounded-lg bg-primary border-0 p-2'
       style={{
-        maxWidth: '350px',
+        maxWidth: '325px',
         width: '100%',
       }}
     >
@@ -199,7 +223,10 @@ const MyPopover = props => {
                   <h6 className='flex-grow-1 text-left align-self-end '>
                     {result.title}
                   </h6>
-                  <Button className='bg-white text-primary rounded-lg'>
+                  <Button
+                    className='bg-white text-primary rounded-lg'
+                    onClick={() => beMember(result)}
+                  >
                     Join
                   </Button>
                 </ListGroup.Item>

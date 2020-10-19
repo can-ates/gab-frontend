@@ -1,22 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-
 import { client } from '../../feathers';
 import Conversation from './Conversation';
 import MyPopover from './MyPopover';
 
+import { updateUser, setFollowings } from '../../actions/user';
 import { setRoom } from '../../actions/room';
 
 const Tab = () => {
   const dispatch = useDispatch();
-  const user = useSelector(state => state.user);
+  const userData = useSelector(state => state.user);
 
   //SET ERRORS
   const [error, setError] = useState('');
-
-  //FOLLOWED GROUPS
-  const [groups, setGroups] = useState([]);
 
   //FETCHING FOLLOWED GROUPS FOR PARTICULAR USER
   useEffect(() => {
@@ -25,7 +22,7 @@ const Tab = () => {
       .find()
       .then(res => {
         dispatch(setRoom(res.data[0]));
-        setGroups(res.data);
+        dispatch(setFollowings(res.data));
       })
       .catch(err => {
         setError(err);
@@ -39,18 +36,22 @@ const Tab = () => {
       .create({
         title: title,
         private: priv,
-        founder: user._id,
+        founder: userData._id,
       })
       .then(res => {
-        setGroups(prv => [...prv, res]);
         dispatch(setRoom(res));
-        
-        
+        dispatch(updateUser(res));
       })
-      .catch(res => {
-        console.log(res);
+      .catch(err => {
+        setError(err);
       });
   };
+
+  const joinGroup = room => {
+    dispatch(updateUser(room));
+  };
+
+
 
   return (
     <div className='d-flex flex-column align-items-center vh-100'>
@@ -65,11 +66,11 @@ const Tab = () => {
           Groups
         </h6>
         <div className='d-flex justify-content-center mb-2'>
-          <MyPopover handleSubmit={handleSubmit} />
+          <MyPopover handleSubmit={handleSubmit} joinGroup={joinGroup} />
         </div>
 
         <div className='w-100 d-flex flex-column justify-content-center align-items-center '>
-          {groups.map(group => (
+          {userData.followedGroups.map(group => (
             <Conversation key={group._id} conversation={group} />
           ))}
         </div>
