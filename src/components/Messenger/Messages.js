@@ -39,39 +39,87 @@ const Messages = () => {
           className='d-flex mb-3'
           style={{
             justifyContent:
-              message.sender.name === userData.user.name ? 'flex-end' : 'flex-start',
+              message.sender.name === userData.user.name
+                ? 'flex-end'
+                : 'flex-start',
           }}
         >
           <Card
-            className='rounded-lg position-relative '
+            className='rounded-lg border-0 position-relative p-2'
             style={{
+              order: message.sender.name === userData.user.name ? '1' : '2',
               backgroundColor:
-                message.sender.name === userData.user.name ? '#6B3BB4' : '#98969E',
+                message.sender.name === userData.user.name
+                  ? '#6B3BB4'
+                  : '#F5F5F5',
             }}
           >
             <Card.Body
+              className='p-0'
               style={{
-                color: message.sender.name === userData.user.name ? 'white' : 'black',
+                zIndex: '3',
+                color:
+                  message.sender.name === userData.user.name
+                    ? 'white'
+                    : 'black',
               }}
             >
-              {message.text}
+              <Card.Title
+                style={{
+                  textAlign:
+                    message.sender.name === userData.user.name
+                      ? 'start'
+                      : 'end',
+                  paddingLeft:
+                    message.sender.name === userData.user.name ? '0.5em' : '0',
+                  paddingRight:
+                    message.sender.name === userData.user.name ? '0' : '0.5em',
+                }}
+                className='py-1 m-0 block'
+                as='h6'
+              >
+                {message.sender.name}
+              </Card.Title>
+              <Card.Text className='p-2 z4'>{message.text}</Card.Text>
             </Card.Body>
-            <div
-              className='position-absolute'
-              style={{
-                height: '10px',
-                width: '30px',
-                right: '-2px',
-                bottom: '9px',
-                transform: 'translateX(5px) rotate(50deg)',
-                backgroundColor:
-                  message.sender.name === userData.user.name ? '#6B3BB4' : '#98969E',
-              }}
-            />
+            {message.sender.name === userData.user.name ? (
+              <div
+                className='position-absolute'
+                style={{
+                  zIndex: '2',
+                  height: '10px',
+                  width: '30px',
+                  right: '-2px',
+                  bottom: '11px',
+                  transform: 'translateX(5px) rotate(50deg)',
+                  backgroundColor: '#6B3BB4',
+                }}
+              />
+            ) : (
+              <div
+                className='position-absolute'
+                style={{
+                  zIndex: '2',
+                  height: '10px',
+                  width: '30px',
+                  left: '-2px',
+                  bottom: '9px',
+                  transform: 'translateX(-5px) rotate(130deg)',
+                  backgroundColor: '#F5F5F5',
+                }}
+              />
+            )}
           </Card>
 
           <Image
-            className='align-self-end ml-2'
+            className='align-self-end'
+            style={{
+              order: message.sender.name === userData.user.name ? '2' : '1',
+              marginRight:
+                message.sender.name === userData.user.name ? '0' : '1em',
+              marginLeft:
+                message.sender.name === userData.user.name ? '1em' : '0',
+            }}
             src={message.sender.avatar}
             roundedCircle
             width='30px'
