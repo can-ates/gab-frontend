@@ -1,5 +1,3 @@
-
-
 .tab-scroll::-webkit-scrollbar {
   display: none;
 }
@@ -18,29 +16,60 @@
 .scrollListener::-webkit-scrollbar {
   width: 5px;
 }
- 
+
 .scrollListener::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 2px #6B3BB4;
-}
- 
-.scrollListener::-webkit-scrollbar-thumb {
-  background-color: #6B3BB4;
-  outline: 1px solid #6B3BB4;
+  box-shadow: inset 0 0 2px #6b3bb4;
 }
 
-.btn, button {
+.scrollListener::-webkit-scrollbar-thumb {
+  background-color: #6b3bb4;
+  outline: 1px solid #6b3bb4;
+}
+
+.btn,
+button {
   box-shadow: none;
 }
 
-.bs-popover-right>.arrow::after, .bs-popover-auto[x-placement^="right"]>.arrow::after {
-  border-right-color: #6B3BB4 !important;
+.bs-popover-right > .arrow::after,
+.bs-popover-auto[x-placement^='right'] > .arrow::after {
+  border-right-color: #6b3bb4 !important;
 }
 
 .custom-control-input:checked ~ .custom-control-label::before {
-  background-color: #0093FF !important;
-  border-color: #0093FF !important;
+  background-color: #0093ff !important;
+  border-color: #0093ff !important;
 }
 
-.form-control:disabled, .form-control[readonly] {
+.form-control:disabled,
+.form-control[readonly] {
   background-color: aliceblue !important;
+}
+
+.btn:focus, .btn.focus {
+  box-shadow: none;
+}
+
+
+.group-card::after {
+  position: absolute;
+  content: '';
+  display: none;
+  background-color: transparent;
+  top: -7px;
+  left: -10px;
+  width: 3rem;
+  z-index: -3;
+  height: 3.5rem;
+  border: 15px solid #6b3bb4;
+  border-radius: 50%;
+  box-shadow: inset -12px 5px 0 3px #6b3bb4;
+}
+
+.group-card:hover::after {
+  display: block;
+}
+
+.active.group-card::after{
+  display: block;
 }

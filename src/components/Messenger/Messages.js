@@ -70,6 +70,10 @@ const Messages = () => {
                     message.sender.name === userData.user.name
                       ? 'start'
                       : 'end',
+                  color:
+                    message.sender.name === userData.user.name
+                      ? '#FFF'
+                      : '#6B3BB4',
                   paddingLeft:
                     message.sender.name === userData.user.name ? '0.5em' : '0',
                   paddingRight:

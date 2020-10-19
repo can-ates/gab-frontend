@@ -51,10 +51,8 @@ const Tab = () => {
     dispatch(updateUser(room));
   };
 
-
-
   return (
-    <div className='d-flex flex-column align-items-center vh-100'>
+    <div className='d-flex flex-column align-items-center vh-100' >
       <div
         className='tab-scroll p-2'
         style={{
@@ -69,7 +67,7 @@ const Tab = () => {
           <MyPopover handleSubmit={handleSubmit} joinGroup={joinGroup} />
         </div>
 
-        <div className='w-100 d-flex flex-column justify-content-center align-items-center '>
+        <div  className='w-100 d-flex flex-column justify-content-center align-items-center'>
           {userData.followedGroups.map(group => (
             <Conversation key={group._id} conversation={group} />
           ))}
