@@ -26,7 +26,7 @@ const FriendPopover = props => {
   const [results, setResults] = useState([]);
 
   //SET POPOVER
-  const [showPopover, setShowPopover] = useState(true);
+  const [showPopover, setShowPopover] = useState(false);
 
   //   const handleSubmit = e => {
   //     e.preventDefault();
@@ -68,7 +68,7 @@ const FriendPopover = props => {
         },
       })
       .then(res => {
-        console.log(res);
+        setShowResults(false)
       })
       .catch(err => console.log(err));
   };

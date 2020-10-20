@@ -33,6 +33,8 @@ const GroupPopover = props => {
 
   const handleSubmit = e => {
     e.preventDefault();
+    setRoomName('')
+    setShowCreate(false)
 
     props.handleSubmit(title, priv);
     setShowPopover(false);
