@@ -10,7 +10,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 
 import { client } from '../../feathers';
 
-const MyPopover = props => {
+const GroupPopover = props => {
   //USER STATE
   const user = useSelector(state => state.user.user)
 
@@ -294,4 +294,4 @@ const MyPopover = props => {
   );
 };
 
-export default MyPopover;
+export default GroupPopover;

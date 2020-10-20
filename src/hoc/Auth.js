@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
@@ -10,6 +10,9 @@ export default function (WrappedComponent) {
     const history = useHistory();
     const dispatch = useDispatch();
 
+    //LOGIN ERROR
+    const [error, setError] = useState('')
+
     useLayoutEffect(() => {
       client
         .reAuthenticate()
@@ -18,11 +21,12 @@ export default function (WrappedComponent) {
           history.push('/chat');
         })
         .catch(err => {
+          setError(err)
           history.push('/');
         });
     }, []);
 
-    return <WrappedComponent />;
+    return <WrappedComponent errors={error} />;
   };
 
   return Auth;

@@ -3,7 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { client } from '../../feathers';
 import Conversation from './Conversation';
-import MyPopover from './MyPopover';
+import GroupPopover from './GroupPopover';
+import FriendPopover from './FriendPopover'
 
 import { updateUser, setFollowings } from '../../actions/user';
 import { setRoom } from '../../actions/room';
@@ -21,7 +22,7 @@ const Tab = () => {
       .service('rooms')
       .find()
       .then(res => {
-        dispatch(setRoom(res.data[0]));
+        
         dispatch(setFollowings(res.data));
       })
       .catch(err => {
@@ -51,8 +52,12 @@ const Tab = () => {
     dispatch(updateUser(room));
   };
 
+  const addFriend = friend => {
+
+  }
+
   return (
-    <div className='d-flex flex-column align-items-center vh-100' >
+    <div className='d-flex flex-column align-items-center vh-100'>
       <div
         className='tab-scroll p-2'
         style={{
@@ -60,23 +65,32 @@ const Tab = () => {
           height: '50%',
         }}
       >
-        <h6 className='font-weight-light text-secondary h6 text-center font-weight-normal'>
+        <h6 className=' text-primary text-center font-weight-normal'>
           Groups
         </h6>
         <div className='d-flex justify-content-center mb-2'>
-          <MyPopover handleSubmit={handleSubmit} joinGroup={joinGroup} />
+          <GroupPopover handleSubmit={handleSubmit} joinGroup={joinGroup} />
         </div>
 
-        <div  className='w-100 d-flex flex-column justify-content-center align-items-center'>
+        <div className='w-100 d-flex flex-column justify-content-center align-items-center'>
           {userData.followedGroups.map(group => (
             <Conversation key={group._id} conversation={group} />
           ))}
         </div>
       </div>
-      <div className='h-50'>
-        <h6 className='font-weight-light text-secondary text-center font-weight-normal'>
-          People
+      <div
+        className='tab-scroll p-2'
+        style={{
+          overflowY: 'scroll',
+          height: '50%',
+        }}
+      >
+        <h6 className=' text-info text-center font-weight-normal'>
+          Friends
         </h6>
+        <div className='d-flex justify-content-center mb-2'>
+          <FriendPopover addFriend={addFriend}  />
+        </div>
       </div>
     </div>
   );

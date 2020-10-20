@@ -1,15 +1,24 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Image from 'react-bootstrap/Image';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import Alert from 'react-bootstrap/Alert';
 import Crood from '../assets/croods.png';
 
-import Auth from '../hoc/Auth'
+import Auth from '../hoc/Auth';
 
-const Home = () => {
+const Home = props => {
+  const [show, setShow] = useState(true);
+
+  useEffect(() => {
+    if (props.error) {
+      setShow(true);
+    }
+  }, [props]);
+
   return (
     <Container className='m-auto container-md vh-100'>
       <Row className='d-flex justify-content-center align-items-center h-100'>
@@ -20,15 +29,30 @@ const Home = () => {
         </Col>
         <Col sm={6}>
           <Row className='text-center'>
-            <Card className='w-100 m-auto border-0' style={{ maxWidth: '30em' }}>
+            <Card
+              className='w-100 m-auto border-0'
+              style={{ maxWidth: '30em' }}
+            >
               <Card.Body>
                 <Card.Title className='text-uppercase text-info'>
                   {' '}
                   use social accounts to log in{' '}
                 </Card.Title>
+                {show && (
+                  <Alert
+                    variant='danger'
+                    onClose={() => setShow(false)}
+                    dismissible
+                    className='rounded-lg'
+                  >
+                    <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
+                    <p>{props.errors.message}</p>
+                  </Alert>
+                )}
 
                 <div className='mt-5 d-flex flex-column align-items-center h-100'>
-                  <Button className='border-0  bg-info d-flex justify-content-around align-items-center my-2 w-75 p-3 rounded'
+                  <Button
+                    className='border-0  bg-info d-flex justify-content-around align-items-center my-2 w-75 p-3 rounded'
                     href='http://localhost:3030/oauth/google'
                   >
                     <i className='fab font-weight-bolder font fa-google text-white' />
@@ -36,7 +60,8 @@ const Home = () => {
                       Sign up with google
                     </p>
                   </Button>
-                  <Button className='border-0  bg-info d-flex justify-content-around align-items-center my-2 w-75 p-3 rounded'
+                  <Button
+                    className='border-0  bg-info d-flex justify-content-around align-items-center my-2 w-75 p-3 rounded'
                     href='http://localhost:3030/oauth/facebook'
                   >
                     <i className='fab font-weight-bolder fa-facebook-f' />
@@ -44,7 +69,8 @@ const Home = () => {
                       Sign up with facebook
                     </p>
                   </Button>
-                  <Button className='border-0  bg-info d-flex justify-content-around align-items-center my-2 w-75 p-3 rounded'
+                  <Button
+                    className='border-0  bg-info d-flex justify-content-around align-items-center my-2 w-75 p-3 rounded'
                     href='http://localhost:3030/oauth/github'
                   >
                     <i className='fab font-weight-bolder fa-github' />
@@ -52,7 +78,8 @@ const Home = () => {
                       Sign up with github
                     </p>
                   </Button>
-                  <Button className='border-0  bg-info d-flex justify-content-around align-items-center my-2 w-75 p-3 rounded'
+                  <Button
+                    className='border-0  bg-info d-flex justify-content-around align-items-center my-2 w-75 p-3 rounded'
                     href='http://localhost:3030/oauth/twitter'
                   >
                     <i className='fab font-weight-bolder fa-twitter' />
@@ -70,4 +97,4 @@ const Home = () => {
   );
 };
 
-export default Auth(Home)
+export default Auth(Home);
