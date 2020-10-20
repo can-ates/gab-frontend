@@ -7,6 +7,7 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import ListGroup from 'react-bootstrap/ListGroup';
+import Image from 'react-bootstrap/Image';
 
 import { client } from '../../feathers';
 
@@ -19,7 +20,7 @@ const FriendPopover = props => {
   const [showResults, setShowResults] = useState(false);
 
   //ADD FRIEND
-  const [userName, setUserName] = useState('');
+  const [email, setEmail] = useState('');
 
   //USER RESULTS
   const [results, setResults] = useState([]);
@@ -38,36 +39,39 @@ const FriendPopover = props => {
   const handleSearch = e => {
     e.preventDefault();
 
-    console.log(userName);
-
     client
       .service('users')
       .find({
         query: {
-          name: userName
+          email: email,
+          $select: ['avatar', 'name', 'email', '_id'],
+          $limit: 5,
         },
       })
-      .then(res => console.log(res))
+      .then(res => {
+        setEmail('');
+        if (res.data) {
+          setResults(res.data);
+          setShowResults(true);
+        }
+      })
       .catch(err => console.log(err));
   };
 
   //   //BE MEMBER OF GROUP
-  //   const beMember = roomData => {
-  //     client
-  //       .service('rooms')
-  //       .patch(
-  //         roomData._id,
-  //         {
-  //           $push: {
-  //             participants: user._id
-  //           },
-  //         }
-  //       )
-  //       .then(res => {
-  //         props.joinGroup(res)
-  //       })
-  //       .catch(err => console.log(err));
-  //   };
+  const sendRequest = userData => {
+    client
+      .service('users')
+      .patch(userData._id, {
+        $push: {
+          notifications: user._id,
+        },
+      })
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => console.log(err));
+  };
 
   const popover = (
     <Popover
@@ -92,55 +96,44 @@ const FriendPopover = props => {
               results.map(result => (
                 <ListGroup.Item
                   key={result._id}
-                  className='bg-primary text-white d-flex align-items-center justify-content-between border border-white rounded-lg mb-2'
+                  className='bg-info text-white d-flex align-items-center justify-content-between border border-white rounded-lg mb-2'
                 >
+                  <Image src={result.avatar} width='35' height='35' />
+                  <h6 className='flex-grow-1 text-left ml-2'>{result.name}</h6>
                   <Button
-                    style={{
-                      borderWidth: '3px',
-                      borderColor: `${result.avatar}`,
-                      color: `${result.avatar}`,
-                    }}
-                    className='bg-white rounded-circle font-weight-bolder mr-2'
+                    className='bg-white text-info rounded-lg border-0'
+                    onClick={() => sendRequest(result)}
                   >
-                    {result.title.charAt(0).toUpperCase()}
-                  </Button>
-                  <h6 className='flex-grow-1 text-left align-self-end '>
-                    {result.title}
-                  </h6>
-                  <Button className='bg-white text-primary rounded-lg'>
-                    Join
+                    Send Request
                   </Button>
                 </ListGroup.Item>
               ))
             ) : (
-              <h5 className='text-center text-white'>No Group Found</h5>
+              <h5 className='text-center text-white'>No one found</h5>
             )}
 
-            <div className='d-flex justify-content-between mt-2'>
-              <Button
-                className='rounded-lg bg-white text-primary'
-                onClick={() => {
-                  setShowResults(pr => !pr);
+            <Button
+              className='rounded-lg bg-white text-info border-0 mt-3'
+              block
+              onClick={() => {
+                setShowResults(pr => !pr);
 
-                  setResults([]);
-                }}
-              >
-                Back
-              </Button>
-            </div>
+                setResults([]);
+              }}
+            >
+              Back
+            </Button>
           </ListGroup>
         )}{' '}
         {!showResults && (
           <Form className='p-2' onSubmit={handleSearch}>
             <Form.Group controlId='formBasicEmail'>
-              <Form.Label className='text-white'>
-                Search By User Name
-              </Form.Label>
+              <Form.Label className='text-white'>Search By Email</Form.Label>
               <Form.Control
                 type='text'
-                placeholder='Enter a name'
-                value={userName}
-                onChange={e => setUserName(e.target.value)}
+                placeholder='Enter an email'
+                value={email}
+                onChange={e => setEmail(e.target.value)}
                 className='border-0 rounded-lg bg-white text-info'
               />
             </Form.Group>
@@ -148,7 +141,7 @@ const FriendPopover = props => {
             <Button
               variant='primary'
               type='submit'
-              disabled={userName === ''}
+              disabled={email === ''}
               block
               className='rounded-lg bg-white text-info mt-4 border-0'
             >
