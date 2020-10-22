@@ -3,16 +3,16 @@ import Figure from 'react-bootstrap/Figure';
 
 const Detail = ({ user }) => {
   return (
-    <div  >
-      <Figure  >
+    <div>
+      <Figure className='d-flex align-items-center flex-column'>
         <Figure.Image
           src={user.avatar}
           alt={`image of ${user.name}`}
           style={{ height: '6rem' }}
           className='img-fluid rounded-circle'
         />
-        <p className='text-center font-weight-bolder text-primary h4 mt-2' >
-            {user.name}
+        <p className='text-center font-weight-bolder text-primary h4 mt-2'>
+          {user.name}
         </p>
       </Figure>
     </div>

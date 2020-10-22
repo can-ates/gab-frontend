@@ -19,20 +19,23 @@ const Chat = () => {
 
   return (
     <Container fluid='xl' style={{ backgroundColor: '#F4F4F4' }}>
-      <Row>
+      <Row  >
         <Col
           style={{
             zIndex: 5,
           }}
-          sm={1}
-          className='d-flex justify-content-center'
+          md={1}
+          
+          className='d-md-flex justify-content-center d-none '
         >
           <Tab />
         </Col>
-        <Col sm={8}>
+        <Col md={8}
+          xs={12}
+        >
           <Messenger />
         </Col>
-        <Col sm={3} className='d-flex justify-content-center mt-2'>
+        <Col md={3}  className='d-md-flex justify-content-center mt-2 d-none '>
           <Detail user={user} />
         </Col>
       </Row>
