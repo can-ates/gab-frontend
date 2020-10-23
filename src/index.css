@@ -6,6 +6,7 @@
   -webkit-box-shadow: 0px 0px 17px -12px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 0px 0px 17px -12px rgba(0, 0, 0, 0.75);
   box-shadow: 0px 0px 17px -12px rgba(0, 0, 0, 0.75);
+  background-color: #fafafa;
 }
 
 .chat-input:focus {
@@ -46,10 +47,10 @@ button {
   background-color: aliceblue !important;
 }
 
-.btn:focus, .btn.focus {
+.btn:focus,
+.btn.focus {
   box-shadow: none;
 }
-
 
 .group-card::after {
   position: absolute;
@@ -70,6 +71,53 @@ button {
   display: block;
 }
 
-.active.group-card::after{
+.active.group-card::after {
   display: block;
+}
+
+.chat {
+  -webkit-box-shadow: 0px 0px 17px -12px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 0px 17px -12px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 17px -12px rgba(0, 0, 0, 0.75);
+  background-color: #f3f6ff;
+}
+
+/* SIDEBARS */
+.left-bar {
+  width: 100%;
+  max-width: 100px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 51;
+  background-color: #f3f6ff;
+  -webkit-box-shadow: 6px 0px 21px -11px rgba(0, 0, 0, 1);
+  -moz-box-shadow: 6px 0px 21px -11px rgba(0, 0, 0, 1);
+  box-shadow: 6px 0px 21px -11px rgba(0, 0, 0, 1);
+}
+
+.right-bar {
+  width: 100%;
+  max-width: 200px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 51;
+  height: 100vh;
+  background-color: #f3f6ff;
+  -webkit-box-shadow: -6px 0px 21px -11px rgba(0, 0, 0, 1);
+  -moz-box-shadow: -6px 0px 21px -11px rgba(0, 0, 0, 1);
+  box-shadow: -6px 0px 21px -11px rgba(0, 0, 0, 1);
+}
+
+.toggle-sidebar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 100vh;
+  background-color: black;
+  opacity: 0.2;
+  z-index: 50;
 }

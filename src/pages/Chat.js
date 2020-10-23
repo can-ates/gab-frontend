@@ -18,7 +18,7 @@ const Chat = () => {
   const user = useSelector(state => state.user.user);
 
   return (
-    <Container fluid='xl' style={{ backgroundColor: '#F4F4F4' }}>
+    <Container fluid='xl' className='chat' >
       <Row  >
         <Col
           style={{
