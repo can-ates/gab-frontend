@@ -25,8 +25,6 @@ const Messenger = () => {
   const [leftBar, setLeftBar] = useState(false);
   //RIGHT BAR
   const [rightBar, setRightBar] = useState(false);
-  //BACKGROUND
-  const [background, setBackground] = useState(true)
   //ERRORS
   const [error, setError] = useState([]);
 
@@ -64,13 +62,11 @@ const Messenger = () => {
 
   return (
     <div className='bg-white rounded-lg vh-100 d-flex flex-column messenger'>
-    {/* LEFT SIDE BAR */}
+      {/* LEFT SIDE BAR */}
       {leftBar && (
         <nav
           style={{
             overflowY: 'scroll',
-
-            
           }}
           className='left-bar vh-100 d-md-none d-block d-flex flex-column align-items-center tab-scroll p-2'
         >
@@ -89,12 +85,16 @@ const Messenger = () => {
       )}
 
       {/* BACKGROUND */}
-      <div 
-      className='toggle-sidebar'
-      onClick={() => {setLeftBar(false); setRightBar(false)}}
-      style={{
-        display: rightBar || leftBar ? 'block' : 'none'
-      }} />
+      <div
+        className='toggle-sidebar'
+        onClick={() => {
+          setLeftBar(false);
+          setRightBar(false);
+        }}
+        style={{
+          display: rightBar || leftBar ? 'block' : 'none',
+        }}
+      />
       {/* RIGHT SIDE BAR */}
       {rightBar && (
         <nav className='right-bar d-md-none d-sm-block d-flex flex-column align-items-center tab-scroll p-2'>
@@ -102,7 +102,12 @@ const Messenger = () => {
         </nav>
       )}
 
-      <div className='px-md-4    d-flex align-items-center justify-content-between justify-content-md-start border-bottom'>
+      <div
+        style={{
+          backgroundColor: '#dde4fc',
+        }}
+        className='px-md-4 d-flex align-items-center justify-content-between justify-content-md-start border-bottom'
+      >
         <Button
           className='d-md-none d-block bg-info border-0 h-100 font-weight-bold rounded-sm '
           onClick={() => setLeftBar(pr => !pr)}
@@ -110,32 +115,37 @@ const Messenger = () => {
           <span>Groups</span>
           <i className='fas fa-angle-double-right ml-2' />
         </Button>
-        <div className='d-flex align-items-center py-3'>
-          <Button
-            style={{
-              borderWidth: '3px',
-              borderColor: `${room.avatar}`,
-              color: `${room.avatar}`,
-            }}
-            className='bg-white rounded-circle font-weight-bolder mb-2'
-            size='lg'
-            disabled
-          >
-            {room.title.charAt(0).toUpperCase()}
-          </Button>
-          <div className='ml-2'>
-            <h6 className='mb-0'>{room.title}</h6>
-            <span className='font-weight-light text-secondary'>
-              {room.participants.length} members
-            </span>
+        {room.title ? (
+          <div className='d-flex align-items-center py-3'>
+            <Button
+              style={{
+                borderWidth: '3px',
+                borderColor: `${room.avatar}`,
+                color: `${room.avatar}`,
+              }}
+              className='bg-white  rounded-circle font-weight-bolder'
+              size='lg'
+              disabled
+            >
+              {room.title.charAt(0).toUpperCase()}
+            </Button>
+            <div className='ml-2'>
+              <h6 className='mb-0'>{room.title}</h6>
+              <span className='font-weight-light text-primary'>
+                {room.participants.length} members
+              </span>
+            </div>
           </div>
-        </div>
+        ) : <div className='d-flex align-items-center py-3 text-center ' >
+              <h6 >Create or Join a group</h6>
+        </div> }
+
         <Button
           className='d-md-none d-block bg-info border-0 h-100 font-weight-bold rounded-sm '
           onClick={() => setRightBar(pr => !pr)}
         >
           <i className='fas fa-angle-double-left mr-2' />
-          <span>Details</span>
+          <span>{user.name}</span>
         </Button>
       </div>
       <div
@@ -143,6 +153,7 @@ const Messenger = () => {
         style={{
           overflowY: 'scroll',
           height: '100%',
+          backgroundColor: '#FAFAFA'
         }}
       >
         <Messages />

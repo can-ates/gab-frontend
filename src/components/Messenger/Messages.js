@@ -51,17 +51,14 @@ const Messages = () => {
               backgroundColor:
                 message.sender.name === userData.user.name
                   ? '#6B3BB4'
-                  : '#F5F5F5',
+                  : '#009CDC',
             }}
           >
             <Card.Body
               className='p-0'
               style={{
                 zIndex: '3',
-                color:
-                  message.sender.name === userData.user.name
-                    ? 'white'
-                    : 'black',
+                color: 'white',
               }}
             >
               <Card.Title
@@ -70,10 +67,7 @@ const Messages = () => {
                     message.sender.name === userData.user.name
                       ? 'start'
                       : 'end',
-                  color:
-                    message.sender.name === userData.user.name
-                      ? '#FFF'
-                      : '#6B3BB4',
+                  color: 'white',
                   paddingLeft:
                     message.sender.name === userData.user.name ? '0.5em' : '0',
                   paddingRight:
@@ -107,9 +101,9 @@ const Messages = () => {
                   height: '10px',
                   width: '30px',
                   left: '-2px',
-                  bottom: '9px',
+                  bottom: '10px',
                   transform: 'translateX(-5px) rotate(130deg)',
-                  backgroundColor: '#F5F5F5',
+                  backgroundColor: '#009CDC',
                 }}
               />
             )}

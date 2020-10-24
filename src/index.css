@@ -2,6 +2,10 @@
   display: none;
 }
 
+h6 {
+  margin: 0 !important;
+}
+
 .messenger {
   -webkit-box-shadow: 0px 0px 17px -12px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 0px 0px 17px -12px rgba(0, 0, 0, 0.75);
@@ -38,7 +42,7 @@ button {
 }
 
 .custom-control-input:checked ~ .custom-control-label::before {
-  background-color: #0093ff !important;
+  background-color: #27a3fc !important;
   border-color: #0093ff !important;
 }
 

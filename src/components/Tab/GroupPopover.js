@@ -91,7 +91,7 @@ const GroupPopover = props => {
       id='popover-basic'
       className='rounded-lg bg-primary border-0 p-2'
       style={{
-        maxWidth: '325px',
+        maxWidth: '275px',
         width: '100%',
       }}
     >

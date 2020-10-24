@@ -36,14 +36,16 @@ const ChatForm = () => {
           value={message}
           onChange={e => setMessage(e.target.value)}
           placeholder='Type something...'
-          className='py-4 chat-input '
+          className='py-4 chat-input rounded-lg'
           style={{ outline: 'none', border: '0' }}
+          disabled={room.title === ''}
         />
       </Form.Group>
       <Button
         type='submit'
         size='lg'
         className='border-0 bg-transparent text-primary'
+        disabled={room.title === ''}
       >
         <i
           style={{

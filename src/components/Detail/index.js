@@ -1,6 +1,8 @@
 import React from 'react';
 import Figure from 'react-bootstrap/Figure';
 
+
+
 const Detail = ({ user }) => {
   return (
     <div>
