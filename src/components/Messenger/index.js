@@ -123,7 +123,7 @@ const Messenger = () => {
                 borderColor: `${room.avatar}`,
                 color: `${room.avatar}`,
               }}
-              className='bg-white  rounded-circle font-weight-bolder'
+              className='bg-white rounded-circle font-weight-bolder'
               size='lg'
               disabled
             >
