@@ -36,7 +36,7 @@ const Chat = () => {
           <Messenger />
         </Col>
         <Col md={3}  className='d-md-flex justify-content-center mt-2 d-none '>
-          <Detail user={user} />
+          <Detail device='desktop' user={user} />
         </Col>
       </Row>
     </Container>

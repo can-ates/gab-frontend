@@ -98,7 +98,7 @@ const Messenger = () => {
       {/* RIGHT SIDE BAR */}
       {rightBar && (
         <nav className='right-bar d-md-none d-sm-block d-flex flex-column align-items-center tab-scroll p-2'>
-          <Detail user={user} />
+          <Detail device='mobile' user={user} />
         </nav>
       )}
 
