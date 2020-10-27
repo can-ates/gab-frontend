@@ -5,7 +5,7 @@ Gab is a real-time chat app that you can create or join a room to interact with 
 ## Motivation
 Real-time messaging apps have become an integral part of all the web users.
 You nearly can't think of an app that does not have real-time functionality and It is something that every web developer should have experience with.
-Feathers Js is a framework for real-time applications that I used in this project
+Side Note: Feathers Js is a framework for real-time applications that I used in this project.
  
 ## Screenshots
 100% RESPONSIVE
