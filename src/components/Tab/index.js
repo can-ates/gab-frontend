@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { client } from '../../feathers';
 import Conversation from './Conversation';
 import GroupPopover from './GroupPopover';
-import FriendPopover from './FriendPopover';
 
 import { updateUser, setFollowings } from '../../actions/user';
 import { setRoom } from '../../actions/room';
@@ -39,6 +38,7 @@ const Tab = () => {
         founder: userData._id,
       })
       .then(res => {
+        console.log(res);
         dispatch(setRoom(res));
         dispatch(updateUser(res));
       })

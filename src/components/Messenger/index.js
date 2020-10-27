@@ -109,14 +109,21 @@ const Messenger = () => {
         className='px-md-4 d-flex align-items-center justify-content-between justify-content-md-start border-bottom'
       >
         <Button
-          className='d-md-none d-block bg-info border-0 h-100 font-weight-bold rounded-sm '
+          style={{
+            backgroundColor: '#8ca7f8',
+          }}
+          className='d-md-none d-block border-0 h-100 font-weight-bold rounded-sm py-0'
           onClick={() => setLeftBar(pr => !pr)}
         >
-          <span>Groups</span>
-          <i className='fas fa-angle-double-right ml-2' />
+          <i
+            style={{
+              fontSize: '1.5rem',
+            }}
+            className='fas fa-door-open px-2'
+          />
         </Button>
         {room.title ? (
-          <div className='d-flex align-items-center py-3'>
+          <div className='d-flex flex-column flex-md-row align-items-center py-2'>
             <Button
               style={{
                 borderWidth: '3px',
@@ -129,23 +136,28 @@ const Messenger = () => {
             >
               {room.title.charAt(0).toUpperCase()}
             </Button>
-            <div className='ml-2'>
-              <h6 className='mb-0'>{room.title}</h6>
-              <span className='font-weight-light text-primary'>
-                {room.participants.length} members
-              </span>
-            </div>
+
+            <h6 className='mb-0 ml-2 text-break'>{room.title}</h6>
           </div>
-        ) : <div className='d-flex align-items-center py-3 text-center ' >
-              <h6 >Create or Join a group</h6>
-        </div> }
+        ) : (
+          <div className='d-flex align-items-center py-3 text-center '>
+            <h6>Create or Join a group</h6>
+          </div>
+        )}
 
         <Button
-          className='d-md-none d-block bg-info border-0 h-100 font-weight-bold rounded-sm '
+          style={{
+            backgroundColor: '#8ca7f8',
+          }}
+          className='d-md-none d-block border-0 h-100 font-weight-bold rounded-sm py-0 '
           onClick={() => setRightBar(pr => !pr)}
         >
-          <i className='fas fa-angle-double-left mr-2' />
-          <span>{user.name}</span>
+          <i
+            style={{
+              fontSize: '1.5rem',
+            }}
+            className='px-2 fas fa-user-friends'
+          />
         </Button>
       </div>
       <div
@@ -153,7 +165,7 @@ const Messenger = () => {
         style={{
           overflowY: 'scroll',
           height: '100%',
-          backgroundColor: '#FAFAFA'
+          backgroundColor: '#FAFAFA',
         }}
       >
         <Messages />

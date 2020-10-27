@@ -6,16 +6,16 @@ import Image from 'react-bootstrap/Image';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
-import Crood from '../assets/croods.png';
+import Gab from '../assets/gab_burned.png';
 
 import Auth from '../hoc/Auth';
 
 const Home = props => {
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
-    if (props.error) {
-      setShow(true);
+    if (props.errors) {
+      if (props.errors.message.includes('email')) setShow(true);
     }
   }, [props]);
 
@@ -24,7 +24,15 @@ const Home = props => {
       <Row className='d-flex justify-content-center align-items-center h-100'>
         <Col sm={6}>
           <Row>
-            <Image fluid className='' src={Crood} />
+            <Image
+              fluid
+              style={{
+                width: '100%',
+                maxWidth: '35em',
+                margin: 'auto',
+              }}
+              src={Gab}
+            />
           </Row>
         </Col>
         <Col sm={6}>
@@ -46,14 +54,14 @@ const Home = props => {
                     className='rounded-lg'
                   >
                     <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
-                    <p>{props.errors.message}</p>
+                    <p>User already exists</p>
                   </Alert>
                 )}
 
                 <div className='mt-5 d-flex flex-column align-items-center h-100'>
                   <Button
                     className='border-0  bg-info d-flex justify-content-around align-items-center my-2 w-75 p-3 rounded'
-                    href='http://localhost:3030/oauth/google'
+                    href={process.env.REACT_APP_GOOGLE}
                   >
                     <i className='fab font-weight-bolder font fa-google text-white' />
                     <p className='text-white my-0 text-uppercase font-weight-bold'>
@@ -62,7 +70,7 @@ const Home = props => {
                   </Button>
                   <Button
                     className='border-0  bg-info d-flex justify-content-around align-items-center my-2 w-75 p-3 rounded'
-                    href='http://localhost:3030/oauth/facebook'
+                    href={process.env.REACT_APP_FACEBOOK}
                   >
                     <i className='fab font-weight-bolder fa-facebook-f' />
                     <p className='text-white my-0 text-uppercase font-weight-bold'>
@@ -71,20 +79,11 @@ const Home = props => {
                   </Button>
                   <Button
                     className='border-0  bg-info d-flex justify-content-around align-items-center my-2 w-75 p-3 rounded'
-                    href='http://localhost:3030/oauth/github'
+                    href={process.env.REACT_APP_GITHUB}
                   >
                     <i className='fab font-weight-bolder fa-github' />
                     <p className='text-white my-0 text-uppercase font-weight-bold '>
                       Sign up with github
-                    </p>
-                  </Button>
-                  <Button
-                    className='border-0  bg-info d-flex justify-content-around align-items-center my-2 w-75 p-3 rounded'
-                    href='http://localhost:3030/oauth/twitter'
-                  >
-                    <i className='fab font-weight-bolder fa-twitter' />
-                    <p className='text-white my-0 text-uppercase font-weight-bold '>
-                      Sign up with twitter
                     </p>
                   </Button>
                 </div>

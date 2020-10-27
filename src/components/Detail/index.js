@@ -1,7 +1,6 @@
 import React from 'react';
 import Figure from 'react-bootstrap/Figure';
 import Image from 'react-bootstrap/Image';
-import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 
 import { useSelector } from 'react-redux';
@@ -24,7 +23,7 @@ const Detail = ({ user, device }) => {
       </Figure>
       {room.title && (
         <div className='rounded-lg '>
-          <h6 className='text-start mb-3 '>Members</h6>
+          <h6 className='text-start mb-3 '>{`Members(${room.participants.length + 1})`}</h6>
           <ListGroup
             className='member-scroll pr-1 '
             style={{
